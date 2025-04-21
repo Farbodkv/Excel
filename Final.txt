@@ -1,0 +1,183 @@
+Sub Consol()
+'
+' Consol Macro
+'
+
+'
+    Cells.Select
+    Selection.UnMerge
+    Columns("H:H").Select
+    Selection.Insert Shift:=xlToRight
+    Columns("K:K").Select
+    Selection.Cut
+    Columns("H:H").Select
+    ActiveSheet.Paste
+    Columns("I:I").Select
+    Selection.Insert Shift:=xlToRight
+    Range("I1").Select
+    ActiveCell.FormulaR1C1 = "Helper"
+    Range("I2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=IF(AND(RC[-1]= """", ISBLANK(RC[-2]) = FALSE), ""NC"", RC[-1])"
+    Range("I2").Select
+
+    Selection.AutoFill Destination:=Range("I2:I" & Sheet1.Range("K" & Sheet1.Rows.Count).End(xlUp).Row)
+    Sheets.Add After:=ActiveSheet
+    ActiveSheet.DisplayRightToLeft = True
+    Application.CutCopyMode = False
+    Application.CutCopyMode = False
+    Application.CutCopyMode = False
+    Application.CutCopyMode = False
+    Selection.Consolidate Sources:= _
+        "[" & ActiveWorkbook.Name & "]" & Sheet1.Name & "!C9:C11" _
+        , Function:=xlSum, TopRow:=True, LeftColumn:=True, CreateLinks:=False
+    ActiveWindow.SmallScroll Down:=6
+    Columns("C:C").Select
+    Selection.Style = "Comma"
+    Selection.NumberFormat = "_(* #,##0.0_);_(* (#,##0.0);_(* ""-""??_);_(@_)"
+    Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+    Sheets("Data Input").Select
+    Columns("J:J").Select
+    Selection.Insert Shift:=xlToRight
+    Range("J1").Select
+    ActiveCell.FormulaR1C1 = "helper 2"
+    Range("J2").Select
+    Application.CutCopyMode = False
+    Application.CutCopyMode = False
+    Dim ws As Worksheet
+    Set ws = Thisworkbook.Sheets("Vlookup Hidden")
+    ws.Visible = xlSheetVisible
+    Sheets("Data Input").Select
+    ActiveCell.FormulaR1C1 = _
+        "=INDEX('Vlookup Hidden'!C[-9],MATCH(RC[-1],'Vlookup Hidden'!C[-8],0))"
+    Selection.AutoFill Destination:=Range("J2:J" & Sheet1.Range("K" & Sheet1.Rows.Count).End(xlUp).Row)
+    Sheets("Sheet1").Select
+    Range("E1").Select
+    Selection.Consolidate Sources:= _
+        "[" & ActiveWorkbook.Name & "]" & Sheet1.Name & "!C10:C12" _
+        , Function:=xlSum, TopRow:=True, LeftColumn:=True, CreateLinks:=False
+    Sheets("Data Input").Select
+    Columns("K:K").Select
+    Selection.Insert Shift:=xlToRight
+    Columns("C:C").Select
+    Selection.Cut
+    Columns("K:K").Select
+    ActiveSheet.Paste
+    Sheets("Sheet1").Select
+    Range("I1").Select
+    Selection.Consolidate Sources:= _
+        "[" & ActiveWorkbook.Name & "]" & Sheet1.Name & "!C11:C13" _
+        , Function:=xlSum, TopRow:=True, LeftColumn:=True, CreateLinks:=False
+    Sheets("Data Input").Select
+    Columns("C:C").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("K:K").Select
+    Selection.Insert Shift:=xlToRight
+    Range("K1").Select
+    ActiveCell.FormulaR1C1 = "helpar 3"
+    Sheets("Vlookup Hidden").Select
+    Range("F1").Select
+    Selection.Copy
+    Sheets("Data Input").Select
+    Range("K2").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Selection.AutoFill Destination:=Range("K2:K" & Sheet1.Range("M" & Sheet1.Rows.Count).End(xlUp).Row)
+    Columns("L:L").Select
+    Selection.Insert Shift:=xlToRight
+    Columns("M:M").Select
+    Selection.Insert Shift:=xlToRight
+    Columns("N:N").Select
+    Selection.Insert Shift:=xlToRight
+    Range("K2:K" & Sheet1.Range("K" & Sheet1.Rows.Count).End(xlUp).Row).Select
+    Selection.Copy
+    Range("L1").Select
+    ActiveCell.FormulaR1C1 = "GorouhBandi Dashboard"
+    Range("M1").Select
+    ActiveCell.FormulaR1C1 = "GorouhBandi Mahsoul"
+    Range("N1").Select
+    ActiveCell.FormulaR1C1 = "GorouhBandi Parvaneh Sakht"
+    Range("L2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Application.CutCopyMode = False
+    Range("L2:L" & Sheet1.Range("K" & Sheet1.Rows.Count).End(xlUp).Row).Select
+    Selection.TextToColumns Destination:=Range("L2:L" & Sheet1.Range("K" & Sheet1.Rows.Count).End(xlUp).Row), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=True, _
+        Semicolon:=False, Comma:=False, Space:=False, Other:=True, OtherChar _
+        :=".", FieldInfo:=Array(Array(1, 1), Array(2, 1), Array(3, 1)), _
+        TrailingMinusNumbers:=True
+    Sheets("Sheet1").Select
+    Range("M1").Select
+    Selection.Consolidate Sources:= _
+        "[" & ActiveWorkbook.Name & "]" & Sheet1.Name & "!C14:C16" _
+        , Function:=xlSum, TopRow:=True, LeftColumn:=True, CreateLinks:=False
+    Sheets("Data Input").Select
+    Columns("N:N").Select
+    Selection.Delete Shift:=xlToLeft
+    Sheets("Sheet1").Select
+    Range("M1").Select
+    ActiveCell.FormulaR1C1 = "GorouhBandi Parvaneh Sakht"
+    Range("Q1").Select
+    Selection.Consolidate Sources:= _
+        "[" & ActiveWorkbook.Name & "]" & Sheet1.Name & "!C13:C15" _
+        , Function:=xlSum, TopRow:=True, LeftColumn:=True, CreateLinks:=False
+    Sheets("Data Input").Select
+    Columns("M:M").Select
+    Selection.Delete Shift:=xlToLeft
+    Sheets("Sheet1").Select
+    Range("Q1").Select
+    ActiveCell.FormulaR1C1 = "GorouhBandi Mahsoul"
+    Range("U1").Select
+    Selection.Consolidate Sources:= _
+        "[" & ActiveWorkbook.Name & "]" & Sheet1.Name & "!C12:C14" _
+        , Function:=xlSum, TopRow:=True, LeftColumn:=True, CreateLinks:=False
+    Range("U1").Select
+    ActiveCell.FormulaR1C1 = "GorouhBandi Dashboard"   
+        Cells.Select
+    Sheets("Sheet1").Select
+    Range("A1").Select
+    ActiveCell.FormulaR1C1 = "Shahr"
+    Range("E1").Select
+    ActiveCell.FormulaR1C1 = "Ostan"
+    Range("I1").Select
+    ActiveCell.FormulaR1C1 = "Hoze Foroush"
+    Columns("G:G").Select
+    Selection.Style = "Comma"
+    Selection.NumberFormat = "_(* #,##0.0_);_(* (#,##0.0);_(* ""-""??_);_(@_)"
+    Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+    Columns("K:K").Select
+    Selection.Style = "Comma"
+    Selection.NumberFormat = "_(* #,##0.0_);_(* (#,##0.0);_(* ""-""??_);_(@_)"
+    Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+    Columns("O:O").Select
+    Selection.Style = "Comma"
+    Selection.NumberFormat = "_(* #,##0.0_);_(* (#,##0.0);_(* ""-""??_);_(@_)"
+    Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+    Columns("S:S").Select
+    Selection.Style = "Comma"
+    Selection.NumberFormat = "_(* #,##0.0_);_(* (#,##0.0);_(* ""-""??_);_(@_)"
+    Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+    Columns("W:W").Select
+    Selection.Style = "Comma"
+    Selection.NumberFormat = "_(* #,##0.0_);_(* (#,##0.0);_(* ""-""??_);_(@_)"
+    Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+    Cells.Select
+    Selection.Columns.AutoFit
+    With Selection.Font
+        .Name = "Dubai"
+        .Size = 10
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    ws.Visible = xlSheetHidden
+End Sub
+
+
